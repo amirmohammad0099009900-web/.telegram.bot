@@ -1,20 +1,17 @@
-import os
 import telebot
 
-# توکن ربات رو اینجا بذار (فعلاً). بهتره بعداً توکن جدید بسازی و توی محیط میزبانی به صورت ENV ست کنی.
-TOKEN = os.getenv("BOT_TOKEN") or "PASTE-YOUR-TOKEN-HERE"
+# اینجا توکن رو وارد کن
+TOKEN = "8324781457:AAFtBm_pedMF-o6mtzbce04zf6Hp7zv7yYM"
 
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
-def start(message):
-    bot.reply_to(message, "سلام! ربات روشنه ✅")
+def send_welcome(message):
+    bot.reply_to(message, "سلام! ربات شما فعال شد 😊")
 
-@bot.message_handler(func=lambda m: True)
+@bot.message_handler(func=lambda message: True)
 def echo_all(message):
-    # هرچی بفرستی همونو برمی‌گردونه
     bot.reply_to(message, message.text)
 
-if __name__ == "__main__":
-    print("Bot is running...")
-    bot.infinity_polling(skip_pending=True)
+print("ربات در حال اجراست...")
+bot.infinity_polling()
